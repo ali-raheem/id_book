@@ -41,3 +41,5 @@ $ sudo apt-get install imagemagick
 ### To do
 
 Allow for capturing webcam images and or converting them without installing imagemagick
+
+Make a icon and default image
