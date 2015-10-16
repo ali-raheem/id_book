@@ -4,7 +4,7 @@ Simple program to manage a simple ID database utilising an RFID scanner which si
 
 ## Dependencies
 
-This python3 program uses PyQt5.
+This python3 program uses PyQt5 and sqlite3.
 
 On a Debian type system this should install dependencies:
 
