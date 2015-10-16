@@ -26,6 +26,8 @@ To update a record you should search>delete>edit>add this procedure will stop it
 It will search for an asset folder which contains the database and any photographs.
 Photographs should be 256x256 and can be created with imagemagick. These needn't be in the assets folder.
 
+To backup the database simply backup assets/address_book.db, this is all that is needed to secure your database.
+
 ```
 $ convert input_image -resize 256x256 output_img
 ```
