@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
+"""
+id_book
 
+Author: Ali Raheem
+Date: 2015-10-17
+"""
 from PyQt5.QtWidgets import (QMainWindow, QApplication, qApp, QWidget,\
  QFileDialog, QGridLayout, QPushButton, QLabel, QLineEdit, QTextEdit)
 from PyQt5.QtGui import (QIcon, QImage, QPixmap)

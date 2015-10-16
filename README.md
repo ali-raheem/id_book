@@ -1,4 +1,4 @@
-# id_book
+# id_book v 0.1.0
 
 Simple program to manage a simple ID database utilising an RFID scanner which simulates a keyboard.
 
@@ -17,6 +17,12 @@ $ sudo apt-get install python3-pyqt5 python-sqlite2
 ```
 $ ./main.py
 ```
+
+## Notes
+
+To save the database you _MUST_ click the save exit button, nothing else will commit the database before closing.
+To update a record you should search>delete>edit>add this procedure will stop it deleteing your entire DB _HOPEFULLY_.
+
 It will search for an asset folder which contains the database and any photographs.
 Photographs should be 256x256 and can be created with imagemagick. These needn't be in the assets folder.
 
