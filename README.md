@@ -1,4 +1,4 @@
-# id_book v 0.1.0
+# id_book v1.0.0
 
 Simple program to manage a simple ID database utilising an RFID scanner which simulates a keyboard.
 
