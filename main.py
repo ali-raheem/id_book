@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-id_book
+id_book v1.0.0
 
 Author: Ali Raheem
 Date: 2015-10-17
@@ -12,11 +12,13 @@ from sys import argv, exit
 import sqlite3
 
 class address_book_window(QMainWindow):
+    """ This class is the basic class of the main UI """
     def __init__(self):
         super().__init__()
         self.init_ui()
         self.db_connect()
     def init_ui(self):
+        """ Initialise the basic UI """
         main_layout = QWidget()
         grid = QGridLayout()
         main_layout.setLayout(grid)
@@ -26,7 +28,7 @@ class address_book_window(QMainWindow):
         label_notes = QLabel('Notes', main_layout)
 
         self.avatar_path = './assets/icon.png'
-        self.photo = QLabel('Photo',main_layout)
+        self.photo = QLabel('Photo', main_layout)
         self.set_photo()
 
         self.edit_name = QLineEdit(main_layout)
@@ -76,6 +78,7 @@ class address_book_window(QMainWindow):
         self.show()
 
     def db_connect(self):
+        """ Try to connect to the db / table, if it doesn't exist create it. """
         try:
             self.db_conn = sqlite3.connect('./assets/address_book.db')
             self.db_curs = self.db_conn.cursor()
@@ -88,6 +91,7 @@ class address_book_window(QMainWindow):
         except:
             self.statusBar().showMessage('Unable to connect to database')
     def db_fetch_next(self):
+        """ Try and find another match to a the latest query """
         self.statusBar().showMessage('Searching...')
         try:
             result = self.db_curs.fetchone()
@@ -100,6 +104,7 @@ class address_book_window(QMainWindow):
         except:
             self.statusBar().showMessage('Searching... Error.')
     def db_query(self):
+        """ Search name, tel and data for LIKE matches to query """
         self.statusBar().showMessage('Searching...')
         try:
             self.db_curs.execute('''SELECT name, tel, data, photo FROM contacts \
@@ -115,16 +120,18 @@ class address_book_window(QMainWindow):
         except:
             self.statusBar().showMessage('Searching... Error.')
     def db_delete(self):
+        """ Delete from the Database EXACT matches of name, tel, and photo """
         self.statusBar().showMessage('Deleting...')
         try:
             self.db_curs.execute('''DELETE FROM contacts \
-            WHERE (name = (?) AND tel = (?) AND data = (?))''',\
+            WHERE (name = (?) AND tel = (?) AND data = (?) AND photo = (?))''',\
              (self.edit_name.text(), self.edit_id.text(),\
-              self.edit_data.toPlainText()))
+              self.edit_data.toPlainText(), self.avatar_path))
             self.statusBar().showMessage('Deleting... Done.')
         except:
             self.statusBar().showMessage('Deleting... Error.')
     def db_insert(self):
+        """ Insert into the database the current information """
         self.statusBar().showMessage('Adding...')
         try:
             self.db_curs.execute('''INSERT INTO contacts VALUES (?, ?, ?, ?)''',\
@@ -134,15 +141,18 @@ class address_book_window(QMainWindow):
         except:
             self.statusBar().showMessage('Adding... Error.')
     def db_close(self):
+        """ Close the db connection and commit """
         self.statusBar().showMessage('Commiting to database')
         self.db_conn.commit()
         self.db_conn.close()
         qApp.exit()
     def find_file(self):
+        """ File dialog for loading avatar """
         self.avatar_path = QFileDialog.getOpenFileName(self, 'Open photo',\
          './assets', 'Image Files (*.png *.jpg *.bmp)')[0]
         self.set_photo()
     def set_photo(self):
+        """ Show the currently loaded avatar """
         self.statusBar().showMessage('Loading Photo...')
         try:
             picture = QImage()
